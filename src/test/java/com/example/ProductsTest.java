@@ -16,4 +16,12 @@ public class ProductsTest {
             .then().statusCode(200)
             .body(is("{\"data\":{\"hello\":\"Hello, GraphQL!\"}}"));
     }
+
+    @Test
+    public void testGetProduct() {
+        given().body("{\"query\":\"{product(id:1) {id name description}}\"}\n")
+            .when().post("/graphql")
+            .then().statusCode(200)
+            .body(is("{\"data\":{\"product\":{\"id\":\"1\",\"name\":\"Chair\",\"description\":\"some chair\"}}}"));
+    }
 }
